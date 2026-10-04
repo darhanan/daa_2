@@ -4,7 +4,8 @@ Own implementations of **DynamicArray**, **MyLinkedList** and **MinHeap** for pr
 values, written from scratch (no `java.util` collections in `src/main`), with operation counters,
 JUnit 5 tests, a reproducible benchmark (W1-W4), plots and a report.
 
-- Report with complexity table, loop-invariant proofs, plots and discussion: [REPORT.md](REPORT.md)
+- Report with complexity table, loop-invariant proofs, plots and discussion: [REPORT.md](REPORT.md) (Word version: [REPORT.docx](REPORT.docx))
+- Assignment description: [DAA_Assignment2_Data_Structures.pdf](DAA_Assignment2_Data_Structures.pdf)
 - Raw results: [results/results.csv](results/results.csv), bonus: [results/buildheap.csv](results/buildheap.csv), [results/memory.csv](results/memory.csv)
 - Charts: [results/plots/](results/plots/)
 
@@ -60,7 +61,7 @@ src/main/java/daa/benchmark    Dataset (seed 42), Workloads W1-W4, BenchmarkRunn
 src/test/java/...              JUnit 5 tests (correctness vs java.util, edge cases, heap property, counters)
 scripts/plot_results.py        charts from the CSV files
 results/                       results.csv, buildheap.csv, memory.csv, plots/
-REPORT.md                      the report
+REPORT.md, REPORT.docx           the report (Markdown and Word)
 ```
 
 ## What is counted
