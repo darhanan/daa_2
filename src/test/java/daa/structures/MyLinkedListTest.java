@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MyLinkedListTest extends IntListContractTest {
-
     @Override
     IntList create() {
         return new MyLinkedList();
@@ -24,11 +23,11 @@ class MyLinkedListTest extends IntListContractTest {
     void getWalksFromTheNearerEnd() {
         MyLinkedList list = filled(100);
         assertEquals(10, list.get(10));
-        assertEquals(11, list.metrics().steps());     // head + 10 hops
+        assertEquals(11, list.metrics().steps());
 
         list.metrics().reset();
         assertEquals(95, list.get(95));
-        assertEquals(5, list.metrics().steps());      // tail + 4 hops back
+        assertEquals(5, list.metrics().steps());
 
         list.metrics().reset();
         list.get(0);
@@ -41,10 +40,10 @@ class MyLinkedListTest extends IntListContractTest {
         MyLinkedList list = filled(1000);
         list.add(0, -1);
         assertEquals(1, list.metrics().steps());
-        assertEquals(4, list.metrics().moves());      // new.prev, new.next, old.prev, head
+        assertEquals(4, list.metrics().moves());
         list.remove(0);
         assertEquals(2, list.metrics().steps());
-        assertEquals(6, list.metrics().moves());      // head, next.prev
+        assertEquals(6, list.metrics().moves());
     }
 
     @Test

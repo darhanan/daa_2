@@ -1,17 +1,5 @@
 package daa.metrics;
 
-/**
- * Counts the physical operations a data structure performs.
- *
- * <ul>
- *   <li><b>steps</b> - one read of an array cell or one move to the next node;</li>
- *   <li><b>moves</b> - one element shifted/copied inside an array or one link (pointer) update in a list;</li>
- *   <li><b>comparisons</b> - one comparison of two elements.</li>
- * </ul>
- *
- * Every structure owns one instance and increments it inside its operations,
- * so the numbers are counted, not estimated afterwards.
- */
 public final class Metrics {
     private long steps;
     private long moves;

@@ -1,7 +1,3 @@
-"""Draws the report charts from results/*.csv into results/plots/.
-
-Usage:  python3 scripts/plot_results.py        (needs matplotlib only)
-"""
 import csv
 import math
 import os
@@ -9,13 +5,12 @@ import os
 import matplotlib
 
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
+import matplotlib.pyplot as plt
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS = os.path.join(ROOT, "results")
 PLOTS = os.path.join(RESULTS, "plots")
 
-# validated categorical slots (blue, orange, aqua) and neutral inks
 BLUE, ORANGE, AQUA = "#2a78d6", "#eb6834", "#1baf7a"
 INK, INK_2, INK_3, GRID, SURFACE = "#0b0b0b", "#52514e", "#8a8984", "#e4e3df", "#fcfcfb"
 
@@ -85,7 +80,7 @@ def ops_panel(ax, rows, workload, variant, structures):
         for metric, color in METRIC_COLOR.items():
             xs, ys = series(rows, metric, workload=workload, variant=variant, structure=s)
             if not any(ys):
-                continue  # a counter that is always 0 cannot be drawn on a log axis
+                continue
             ax.plot(xs, ys, STRUCTURE_STYLE[s], color=color, linewidth=2, marker="o", markersize=5,
                     markeredgecolor=SURFACE, markeredgewidth=1.2,
                     label=f"{metric} - {s}" if len(structures) > 1 else metric)

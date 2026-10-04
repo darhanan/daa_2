@@ -10,17 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
 
-/**
- * Runs workloads W1-W4 for n = 100, 1 000, 10 000, 100 000 and writes
- * {@code results.csv}; also writes {@code buildheap.csv} for bonus task B.
- *
- * <p>Before measuring, the whole suite runs once for {@link #WARMUP_SIZES} and is discarded,
- * so the JIT has compiled every workload. Then every case is executed {@link #WARMUP_RUNS}
- * more times without recording and {@link #MEASURED_RUNS} times; the median time is saved. The counters are the same
- * in every run because the input is fixed by the seed, and this is checked.
- *
- * <p>Usage: {@code java daa.benchmark.BenchmarkRunner [outputDir]} (default {@code results}).
- */
 public final class BenchmarkRunner {
     static final int[] SIZES = {100, 1_000, 10_000, 100_000};
     static final int[] WARMUP_SIZES = {100, 1_000, 10_000};
@@ -28,7 +17,6 @@ public final class BenchmarkRunner {
     static final int MEASURED_RUNS = 5;
     static final String HEADER = "workload,variant,structure,n,time_ms,steps,moves,comparisons\n";
 
-    /** One measurable case; creates a fresh structure on every call. */
     @FunctionalInterface
     interface Case {
         Trial run();
@@ -98,7 +86,6 @@ public final class BenchmarkRunner {
         System.out.print("  " + row);
     }
 
-    /** Warm-up runs are discarded; returns the measured trial with the median time. */
     static Trial measure(Case c) {
         for (int i = 0; i < WARMUP_RUNS; i++) {
             c.run();
@@ -115,7 +102,6 @@ public final class BenchmarkRunner {
         return trials[MEASURED_RUNS / 2];
     }
 
-    /** Insertion sort by time; only 5 elements, and keeps java.util collections out of the main code. */
     private static void sortByTime(Trial[] trials) {
         for (int i = 1; i < trials.length; i++) {
             Trial key = trials[i];

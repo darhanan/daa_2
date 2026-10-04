@@ -2,13 +2,7 @@ package daa.structures;
 
 import daa.metrics.Metrics;
 
-/**
- * Doubly linked list of primitive {@code int} values with head and tail pointers.
- * Index-based operations walk from the nearer end, so reaching index {@code i}
- * costs {@code min(i, size - 1 - i) + 1} steps.
- */
 public class MyLinkedList implements IntList {
-
     private static final class Node {
         int value;
         Node prev;
@@ -87,7 +81,6 @@ public class MyLinkedList implements IntList {
         return metrics;
     }
 
-    /** Walks to the node at {@code index} from the nearer end; every node visited is one step. */
     private Node node(int index) {
         Node cur;
         if (index < (size >> 1)) {

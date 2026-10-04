@@ -16,8 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class MinHeapTest {
-
-    /** Checks a[parent] <= a[child] for every child in the heap array. */
     private static void assertHeapProperty(MinHeap heap) {
         int[] a = heap.toArray();
         for (int child = 1; child < a.length; child++) {
@@ -27,8 +25,6 @@ class MinHeapTest {
             }
         }
     }
-
-    // ---------- empty heap ----------
 
     @Test
     void emptyHeapThrowsIllegalState() {
@@ -51,8 +47,6 @@ class MinHeapTest {
     void invalidCapacityIsRejected() {
         assertThrows(IllegalArgumentException.class, () -> new MinHeap(0));
     }
-
-    // ---------- one element and duplicates ----------
 
     @Test
     void oneElement() {
@@ -111,8 +105,6 @@ class MinHeapTest {
         assertHeapProperty(heap);
     }
 
-    // ---------- heap property after every operation ----------
-
     @ParameterizedTest
     @ValueSource(longs = {1, 42, 2026})
     void heapPropertyHoldsAfterEveryInsertAndExtract(long seed) {
@@ -135,8 +127,6 @@ class MinHeapTest {
         }
     }
 
-    // ---------- sorted output ----------
-
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 10, 1_000, 50_000})
     void nExtractMinCallsReturnSortedValues(int n) {
@@ -158,8 +148,6 @@ class MinHeapTest {
         Arrays.sort(values);
         assertArrayEquals(values, out);
     }
-
-    // ---------- Floyd's buildHeap (bonus B) ----------
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 7, 8, 1_000, 10_001})
@@ -202,7 +190,7 @@ class MinHeapTest {
         int n = 100_000;
         int[] descending = new int[n];
         for (int i = 0; i < n; i++) {
-            descending[i] = n - i;    // worst case for insert: every value bubbles to the root
+            descending[i] = n - i;
         }
         MinHeap byInsert = new MinHeap();
         for (int v : descending) {

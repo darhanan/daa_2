@@ -24,7 +24,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- Used only by daa.benchmark.MemoryFootprint (bonus task A). -->
         <dependency>
             <groupId>org.openjdk.jol</groupId>
             <artifactId>jol-core</artifactId>
@@ -49,7 +48,6 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.5.0</version>
                 <executions>
-                    <!-- ./mvnw -q compile exec:exec@benchmark -->
                     <execution>
                         <id>benchmark</id>
                         <configuration>
@@ -64,7 +62,6 @@
                             </arguments>
                         </configuration>
                     </execution>
-                    <!-- ./mvnw -q compile exec:exec@memory -->
                     <execution>
                         <id>memory</id>
                         <configuration>

@@ -3,21 +3,12 @@ package daa.benchmark;
 import daa.structures.IntList;
 import daa.structures.MinHeap;
 
-/**
- * The four workloads of the assignment plus the buildHeap comparison (bonus B).
- * Each method runs one trial on a fresh structure and times only the measured phase;
- * filling the list before W1-W3 is not timed and the counters are reset after it.
- * Every workload checks its own result, so a wrong structure cannot produce a "fast" row.
- */
 public final class Workloads {
-
-    /** Consumes results so the JIT cannot remove the measured loops as dead code. */
     private static long sink;
 
     private Workloads() {
     }
 
-    /** W1: 10 000 calls of get(index) with random indices. */
     public static Trial randomAccess(IntList list, Dataset d) {
         fill(list, d.values);
         long sum = 0;
@@ -30,7 +21,6 @@ public final class Workloads {
         return Trial.of(elapsed, list.metrics());
     }
 
-    /** W2: 1 000 contains(x) queries, half of them present and half absent. */
     public static Trial search(IntList list, Dataset d) {
         fill(list, d.values);
         int hits = 0;
@@ -47,7 +37,6 @@ public final class Workloads {
         return Trial.of(elapsed, list.metrics());
     }
 
-    /** W3: 1 000 insertions followed by 1 000 removals at index 0 (head) or n / 2 (middle). */
     public static Trial insertRemove(IntList list, Dataset d, boolean middle) {
         fill(list, d.values);
         int index = middle ? d.size() / 2 : 0;
@@ -69,7 +58,6 @@ public final class Workloads {
         return Trial.of(elapsed, list.metrics());
     }
 
-    /** W4: n inserts, then n extractMin calls whose results must be non-decreasing. */
     public static Trial priority(MinHeap heap, Dataset d) {
         heap.metrics().reset();
         boolean sorted = true;
@@ -92,7 +80,6 @@ public final class Workloads {
         return Trial.of(elapsed, heap.metrics());
     }
 
-    /** Bonus B: build a heap from {@code values} with n separate insert calls. O(n log n) worst case. */
     public static Trial buildByInserts(int[] values) {
         MinHeap heap = new MinHeap(values.length);
         long start = System.nanoTime();
@@ -105,7 +92,6 @@ public final class Workloads {
         return trial;
     }
 
-    /** Bonus B: build the same heap with Floyd's bottom-up buildHeap. O(n). */
     public static Trial buildByFloyd(int[] values) {
         MinHeap heap = new MinHeap(values.length);
         long start = System.nanoTime();
@@ -116,7 +102,6 @@ public final class Workloads {
         return trial;
     }
 
-    /** Values n, n-1, ..., 1: the worst case for insert, because every new value bubbles up to the root. */
     public static int[] descending(int n) {
         int[] values = new int[n];
         for (int i = 0; i < n; i++) {

@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WorkloadsTest {
-
     @Test
     void datasetIsReproducible() {
         Dataset a = Dataset.of(1_000);
@@ -62,7 +61,6 @@ class WorkloadsTest {
         long[] times = {999, 999, 999, 999, 999, 50, 10, 40, 20, 30};
         int[] call = {0};
         BenchmarkRunner.Case c = () -> new Trial(times[call[0]++], 1, 1, 1);
-        // the 5 slow warm-up runs are discarded; measured 50, 10, 40, 20, 30 -> median 30
         assertEquals(30, BenchmarkRunner.measure(c).nanos());
     }
 }

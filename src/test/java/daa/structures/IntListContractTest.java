@@ -14,9 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Behaviour shared by DynamicArray and MyLinkedList; each structure runs every test below. */
 abstract class IntListContractTest {
-
     abstract IntList create();
 
     private IntList listOf(int... values) {
@@ -26,8 +24,6 @@ abstract class IntListContractTest {
         }
         return list;
     }
-
-    // ---------- empty structure ----------
 
     @Test
     void emptyListHasSizeZero() {
@@ -52,8 +48,6 @@ abstract class IntListContractTest {
         assertArrayEquals(new int[] {7}, list.toArray());
     }
 
-    // ---------- one element ----------
-
     @Test
     void oneElement() {
         IntList list = listOf(42);
@@ -76,8 +70,6 @@ abstract class IntListContractTest {
         assertArrayEquals(new int[] {4, 3}, list.toArray());
     }
 
-    // ---------- duplicates ----------
-
     @Test
     void duplicateValues() {
         IntList list = listOf(5, 5, 3, 5);
@@ -98,8 +90,6 @@ abstract class IntListContractTest {
         assertTrue(list.contains(Integer.MAX_VALUE));
         assertEquals(-1, list.get(3));
     }
-
-    // ---------- first and last index ----------
 
     @Test
     void firstAndLastIndex() {
@@ -125,8 +115,6 @@ abstract class IntListContractTest {
         assertArrayEquals(new int[] {1, 2, 4, 5}, list.toArray());
     }
 
-    // ---------- invalid index ----------
-
     @ParameterizedTest
     @ValueSource(ints = {-1, 3, 4, Integer.MIN_VALUE, Integer.MAX_VALUE})
     void getAndRemoveRejectInvalidIndex(int index) {
@@ -143,8 +131,6 @@ abstract class IntListContractTest {
         assertThrows(IndexOutOfBoundsException.class, () -> list.add(index, 9));
         assertArrayEquals(new int[] {1, 2, 3}, list.toArray());
     }
-
-    // ---------- correctness against java.util.ArrayList on random data ----------
 
     @ParameterizedTest
     @ValueSource(longs = {1, 42, 2026})
@@ -176,8 +162,6 @@ abstract class IntListContractTest {
         int[] expectedArray = expected.stream().mapToInt(Integer::intValue).toArray();
         assertArrayEquals(expectedArray, list.toArray());
     }
-
-    // ---------- counters ----------
 
     @Test
     void containsCountsOneStepAndOneComparisonPerElementVisited() {

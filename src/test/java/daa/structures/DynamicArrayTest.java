@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DynamicArrayTest extends IntListContractTest {
-
     @Override
     IntList create() {
         return new DynamicArray();
@@ -34,7 +33,6 @@ class DynamicArrayTest extends IntListContractTest {
         for (int i = 0; i < 1024; i++) {
             array.add(i);
         }
-        // copies at sizes 1, 2, 4, ..., 512 -> 1023 moves in total, i.e. amortized O(1) per add
         assertEquals(1023, array.metrics().moves());
     }
 
@@ -62,11 +60,11 @@ class DynamicArrayTest extends IntListContractTest {
             array.add(i);
         }
         array.metrics().reset();
-        array.add(0, -1);       // shifts 10 elements
+        array.add(0, -1);
         assertEquals(10, array.metrics().moves());
-        array.remove(0);        // shifts 10 elements back
+        array.remove(0);
         assertEquals(20, array.metrics().moves());
-        array.remove(9);        // last element: nothing to shift
+        array.remove(9);
         assertEquals(20, array.metrics().moves());
     }
 }

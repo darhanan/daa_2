@@ -2,11 +2,6 @@ package daa.structures;
 
 import daa.metrics.Metrics;
 
-/**
- * Resizable array of primitive {@code int} values.
- * When the backing array is full it is replaced by one twice as large,
- * which makes {@link #add(int)} amortized O(1).
- */
 public class DynamicArray implements IntList {
     private static final int DEFAULT_CAPACITY = 8;
 
@@ -41,7 +36,6 @@ public class DynamicArray implements IntList {
         if (size == data.length) {
             grow();
         }
-        // shift data[index..size-1] one cell to the right, starting from the end
         for (int i = size; i > index; i--) {
             data[i] = data[i - 1];
             metrics.move();
@@ -55,7 +49,6 @@ public class DynamicArray implements IntList {
         checkIndex(index);
         int removed = data[index];
         metrics.step();
-        // shift data[index+1..size-1] one cell to the left
         for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
             metrics.move();
@@ -102,7 +95,6 @@ public class DynamicArray implements IntList {
         return metrics;
     }
 
-    /** Length of the backing array (visible for tests of the 2x growth policy). */
     int capacity() {
         return data.length;
     }

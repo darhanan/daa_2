@@ -12,13 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
 
-/**
- * Bonus task A: measures with JOL (Java Object Layout) how many bytes n elements really take.
- * {@link GraphLayout} walks the whole object graph reachable from the structure, so the
- * numbers include the backing array, every node object, headers and alignment padding.
- *
- * <p>Usage: {@code java daa.benchmark.MemoryFootprint [outputDir]} (default {@code results}).
- */
 public final class MemoryFootprint {
     static final int[] SIZES = {100, 1_000, 10_000, 100_000, 1_000_000};
 

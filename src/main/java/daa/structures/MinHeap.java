@@ -2,11 +2,6 @@ package daa.structures;
 
 import daa.metrics.Metrics;
 
-/**
- * Array-based binary min-heap of primitive {@code int} values.
- * For every index {@code i > 0}: {@code heap[(i - 1) / 2] <= heap[i]},
- * so the minimum is always at {@code heap[0]}.
- */
 public class MinHeap {
     private static final int DEFAULT_CAPACITY = 8;
 
@@ -25,7 +20,6 @@ public class MinHeap {
         heap = new int[initialCapacity];
     }
 
-    /** Adds {@code x} at the first free leaf and bubbles it up. O(log n). */
     public void insert(int x) {
         if (size == heap.length) {
             grow();
@@ -35,7 +29,6 @@ public class MinHeap {
         siftUp(size - 1);
     }
 
-    /** Returns the minimum without removing it. O(1). */
     public int peekMin() {
         if (size == 0) {
             throw new IllegalStateException("heap is empty");
@@ -44,7 +37,6 @@ public class MinHeap {
         return heap[0];
     }
 
-    /** Removes and returns the minimum: the last leaf moves to the root and bubbles down. O(log n). */
     public int extractMin() {
         if (size == 0) {
             throw new IllegalStateException("heap is empty");
@@ -60,10 +52,6 @@ public class MinHeap {
         return min;
     }
 
-    /**
-     * Floyd's bottom-up construction: replaces the content of the heap with {@code array}
-     * and sifts down every internal node from the last one to the root. O(n).
-     */
     public void buildHeap(int[] array) {
         heap = new int[Math.max(array.length, DEFAULT_CAPACITY)];
         for (int i = 0; i < array.length; i++) {
@@ -83,7 +71,6 @@ public class MinHeap {
         return size == 0;
     }
 
-    /** Copy of the backing array in heap order. Helper for tests; not counted in the metrics. */
     public int[] toArray() {
         int[] copy = new int[size];
         for (int i = 0; i < size; i++) {
@@ -96,7 +83,6 @@ public class MinHeap {
         return metrics;
     }
 
-    /** Bubble-up: swaps the element at {@code i} with its parent while it is smaller. */
     private void siftUp(int i) {
         int x = heap[i];
         while (i > 0) {
@@ -114,7 +100,6 @@ public class MinHeap {
         }
     }
 
-    /** Bubble-down: swaps the element at {@code i} with its smaller child while it is larger. */
     private void siftDown(int i) {
         int x = heap[i];
         while (true) {
