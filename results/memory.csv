@@ -1,0 +1,21 @@
+structure,n,bytes,mb,bytes_per_element
+DynamicArray,100,592,0.0006,5.92
+DynamicArray(exact capacity),100,480,0.0005,4.80
+MyLinkedList,100,2472,0.0024,24.72
+MinHeap,100,592,0.0006,5.92
+DynamicArray,1000,4176,0.0040,4.18
+DynamicArray(exact capacity),1000,4080,0.0039,4.08
+MyLinkedList,1000,24072,0.0230,24.07
+MinHeap,1000,4176,0.0040,4.18
+DynamicArray,10000,65616,0.0626,6.56
+DynamicArray(exact capacity),10000,40080,0.0382,4.01
+MyLinkedList,10000,240072,0.2290,24.01
+MinHeap,10000,65616,0.0626,6.56
+DynamicArray,100000,524368,0.5001,5.24
+DynamicArray(exact capacity),100000,400080,0.3815,4.00
+MyLinkedList,100000,2400072,2.2889,24.00
+MinHeap,100000,524368,0.5001,5.24
+DynamicArray,1000000,4194384,4.0001,4.19
+DynamicArray(exact capacity),1000000,4000080,3.8148,4.00
+MyLinkedList,1000000,24000072,22.8883,24.00
+MinHeap,1000000,4194384,4.0001,4.19
