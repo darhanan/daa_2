@@ -1,6 +1,6 @@
 # Assignment 2 - Data Structures: Report
 
-**Student:** Darkhan Tynyshtyk · **Group:** _(fill in)_ · **Course:** Design and Analysis of Algorithms
+**Student:** Darkhan Tynyshtyk · **Group:** SE-2523 · **Course:** Design and Analysis of Algorithms
 
 **Environment:** Apple M3 (8 GB RAM), macOS, OpenJDK 25.0.1 (HotSpot, compressed oops), heap `-Xms1g -Xmx1g`.
 **Method:** input from `new Random(42)`; a discarded warm-up pass over n = 100, 1 000, 10 000, then per case
@@ -75,7 +75,7 @@ while (true) {
     int smallest = left, s = heap[left];
     if (left + 1 < size && heap[left + 1] < s) { smallest = left + 1; s = heap[left + 1]; }
     if (x <= s) break;
-    heap[i] = s; heap[smallest] = x;      // swap
+    heap[i] = s; heap[smallest] = x;
     i = smallest;
 }
 ```
