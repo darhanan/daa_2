@@ -60,6 +60,21 @@ public class MinHeap {
         return min;
     }
 
+    /**
+     * Floyd's bottom-up construction: replaces the content of the heap with {@code array}
+     * and sifts down every internal node from the last one to the root. O(n).
+     */
+    public void buildHeap(int[] array) {
+        heap = new int[Math.max(array.length, DEFAULT_CAPACITY)];
+        for (int i = 0; i < array.length; i++) {
+            heap[i] = array[i];
+        }
+        size = array.length;
+        for (int i = size / 2 - 1; i >= 0; i--) {
+            siftDown(i);
+        }
+    }
+
     public int size() {
         return size;
     }
