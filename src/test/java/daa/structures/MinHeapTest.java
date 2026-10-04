@@ -158,4 +158,59 @@ class MinHeapTest {
         Arrays.sort(values);
         assertArrayEquals(values, out);
     }
+
+    // ---------- Floyd's buildHeap (bonus B) ----------
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2, 7, 8, 1_000, 10_001})
+    void buildHeapProducesValidHeap(int n) {
+        Random rnd = new Random(n);
+        int[] values = new int[n];
+        for (int i = 0; i < n; i++) {
+            values[i] = rnd.nextInt(100);
+        }
+        int[] original = values.clone();
+        MinHeap heap = new MinHeap();
+        heap.buildHeap(values);
+        assertArrayEquals(original, values, "buildHeap must not modify its argument");
+        assertEquals(n, heap.size());
+        assertHeapProperty(heap);
+
+        int[] out = new int[n];
+        for (int i = 0; i < n; i++) {
+            out[i] = heap.extractMin();
+            assertHeapProperty(heap);
+        }
+        Arrays.sort(original);
+        assertArrayEquals(original, out);
+    }
+
+    @Test
+    void buildHeapReplacesOldContentAndAllowsInserts() {
+        MinHeap heap = new MinHeap();
+        heap.insert(-100);
+        heap.buildHeap(new int[] {5, 3, 8});
+        assertEquals(3, heap.size());
+        heap.insert(1);
+        assertHeapProperty(heap);
+        assertEquals(1, heap.extractMin());
+        assertEquals(3, heap.extractMin());
+    }
+
+    @Test
+    void buildHeapUsesFewerComparisonsThanRepeatedInserts() {
+        int n = 100_000;
+        int[] descending = new int[n];
+        for (int i = 0; i < n; i++) {
+            descending[i] = n - i;    // worst case for insert: every value bubbles to the root
+        }
+        MinHeap byInsert = new MinHeap();
+        for (int v : descending) {
+            byInsert.insert(v);
+        }
+        MinHeap byFloyd = new MinHeap();
+        byFloyd.buildHeap(descending);
+        assertTrue(byFloyd.metrics().comparisons() < 2L * n, "Floyd must be linear");
+        assertTrue(byInsert.metrics().comparisons() > 10L * n, "inserts must be n log n");
+    }
 }
